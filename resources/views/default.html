@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.4/sweetalert2.min.css">
+</head>
+<body class="bg-primary" style="padding: 3rem 0;">
+
+    <div style="position: fixed;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,.5);display: none;justify-content: center;align-items: center;z-index: 99;" id="loading">
+        <div class="spinner-border text-light" role="status"></div>
+    </div>
+
+    <div class="container" id="app">
+
+        <div class="rounded bg-white overflow-hidden p-4" style="box-shadow: 0 6px 30px 0.2rem rgba(0,0,0,.5);">
+            <ul class="nav bg-light p-2 rounded nav-pills" id="myTab" role="tablist" style="width: fit-content;margin: auto;">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="hitung-zakat-tab" data-bs-toggle="tab" data-bs-target="#hitung-zakat" type="button" role="tab" aria-controls="hitung-zakat" aria-selected="false">Hitung Zakat</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="input-data-tab" data-bs-toggle="tab" data-bs-target="#input-data" type="button" role="tab" aria-controls="input-data" aria-selected="false">Input Data</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button" role="tab" aria-controls="report" aria-selected="false">Report</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="text-center">
+                        <img src="https://img.freepik.com/free-vector/muslim-character-give-zakat-illustration_450176-6.jpg?w=600" alt="zakat">
+                        <h1>Aplikasi Zakat Berbasis Web</h1>
+                        <h3 class="text-primary">Kelompok 1</h3>
+                        <div><b>Anggota:</b></div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                        <div style="background-color: grey;" class="text-white small py-1 px-2 my-2 rounded d-inline-block">Zulfahmi</div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="hitung-zakat" role="tabpanel" aria-labelledby="hitung-zakat-tab">
+                    <div class="row">
+                        <div class="col-md-6 p-5">
+                            <div class="form-group mt-3.">
+                                <label for="">Pendapatan (Gaji/Bulan):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f1" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="">Pendapatan Lain-Lain (Perbulan):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f2" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="">Kebutuhan (Perulan):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f3" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="">Harga Emas Saat Ini (Pergram):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f4" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="">Harga Beras Saat Ini (Perkilo):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f5" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="">Zakat Fitrah (Jumlah Orang):</label>
+                                <input type="number" @keyup="onKeyUp" min="0" v-model="f6" class="form-control mt-1" placeholder="Type here...">
+                            </div>
+                            <!-- <button class="btn btn-primary"></button> -->
+                        </div>
+                        <div class="col-md-6 p-3">
+                            <div class="bg-light py-2 px-3 rounded">
+                                <table class="table small">
+                                    <tr>
+                                        <td style="width: 75%;"><b>Pendapatan</b></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pendapatan (Pertahun)</td>
+                                        <td style="text-align:right;">{{ format(r1) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kebutuhan (Pertahun)</td>
+                                        <td style="text-align:right;">{{ format(r2) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sisa Pendapatan</td>
+                                        <td style="text-align:right;">{{ format(r3) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Zakat Ma'al</b></td>
+                                        <td style="text-align:right;" class="text-primary">{{ c1 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Besarnya Nishab</td>
+                                        <td style="text-align:right;">{{ format(r4) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Zakat Ma'al Yang Harus Dibayar (Pertahun)</td>
+                                        <td style="text-align:right;">{{ format(r5) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zakat (Harta Simpanan) Di Breakdown (Perbulan)</td>
+                                        <td style="text-align:right;">{{ format(r6) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Zakat At-Zira'ah</b></td>
+                                        <td style="text-align:right;" class="text-primary">{{ c2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Besarnya Nishab</td>
+                                        <td style="text-align:right;">{{ format(r7) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Zakat At-Zari'ah (Zakat Profesi) Yang Wajib Dibayar (Pertahun)</td>
+                                        <td style="text-align:right;">{{ format(r8) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Zakat Fitrah</b></td>
+                                        <td style="text-align:right;" class="text-primary">{{ c3 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumlah Zakat Fitrah Yang Wajib Dibayar (Pertahun)</td>
+                                        <td style="text-align:right;">{{ format(r9) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Zakat Yang Dibayarkan Pertahun (Zakat Ma'al + Zakat At-Zira' ah + Zakat Fitrah)</td>
+                                        <td style="text-align:right;">{{ format(t) }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="input-data" role="tabpanel" aria-labelledby="input-data-tab">
+                    <div class="row my-5">
+                        <div class="col-md-6 m-auto">
+                            <div class="form-group mb-3">
+                                <label for="">NIK:</label>
+                                <input type="number" v-model="input.nik" class="form-control">
+                                <div class="small text-danger" v-for="(v,i) in errors.nik" :key="i">{{ v }}</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Nama Muzakki:</label>
+                                <input type="text" v-model="input.nama" class="form-control">
+                                <div class="small text-danger" v-for="(v,i) in errors.nama" :key="i">{{ v }}</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Zakat Ma'al:</label>
+                                <input type="number" v-model="input.zakat_mal" class="form-control">
+                                <div class="small text-danger" v-for="(v,i) in errors.zakat_mal" :key="i">{{ v }}</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Zakat At-Zira'ah:</label>
+                                <input type="number" v-model="input.zakat_profesi" class="form-control">
+                                <div class="small text-danger" v-for="(v,i) in errors.zakat_profesi" :key="i">{{ v }}</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Zakat Fitrah:</label>
+                                <input type="number" v-model="input.zakat_fitrah" class="form-control">
+                                <div class="small text-danger" v-for="(v,i) in errors.zakat_fitrah" :key="i">{{ v }}</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button @click="save" class="btn btn-primary btn-block w-100">SIMPAN</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
+                    <div class="text-center mt-3">
+                        <a :href="domain + '/download'" class="btn btn-primary">Download Export</a>
+                    </div>
+                    <table class="table table-striped mt-4 mb-3">
+                        <thead >
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nik</th>
+                            <th scope="col">Nama Muzakki</th>
+                            <th scope="col">Zakat Ma'al</th>
+                            <th scope="col">Zakat At'Zira'ah</th>
+                            <th scope="col">Zakat Fitrah</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Hapus</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(v,i) in zakat" :key="i">
+                            <th scope="row">{{ i+1 }}</th>
+                            <td>{{ v.nik }}</td>
+                            <td>{{ v.nama }}</td>
+                            <td>{{ v.zm }}</td>
+                            <td>{{ v.za }}</td>
+                            <td>{{ v.zf }}</td>
+                            <td>{{ v.total }}</td>
+                            <td>
+                                <button @click="hapus(v,i)" class="btn btn-danger btn-sm px-3">&times;</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.4/sweetalert2.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        $(() => {
+            let app = new Vue({
+                
+                el: '#app',
+                data: {
+                    domain: 'https://zulfahmi.ukmpolicy.org',
+                    f1: 0,
+                    f2: 0,
+                    f3: 0,
+                    f4: 0,
+                    f5: 0,
+                    f6: 0,
+                    r1: 0,
+                    r2: 0,
+                    r3: 0,
+                    r4: 0,
+                    r5: 0,
+                    r6: 0,
+                    r7: 0,
+                    r8: 0,
+                    r9: 0,
+                    c1: 'Tidak Wajib',
+                    c2: 'Tidak Wajib',
+                    c3: 'Wajib',
+                    t: 0,
+                    input: {
+                        nik: '',
+                        nama: '',
+                        zakat_mal: '',
+                        zakat_profesi: '',
+                        zakat_fitrah: '',
+                    },
+                    errors: {
+                        nik: [],
+                        nama: [],
+                        zakat_mal: [],
+                        zakat_profesi: [],
+                        zakat_fitrah: [],
+                    },
+                    zakat: [],
+                },
+                mounted() {
+                    axios.get(this.domain + '/api/zakat')
+                    .then(r => {
+                        this.zakat = r.data.body;
+                        console.log(this.zakat);
+                    })
+                },
+                methods: {
+                    onKeyUp() {
+                        this.r1 = (parseInt(this.f1) * 12) + (parseInt(this.f2) * 12);
+                        this.r2 = parseInt(this.f3) * 12;
+                        this.r3 = parseInt(this.r1) - parseInt(this.r2);
+
+                        this.r4 = parseInt(this.f4) * 85;
+                        r5 = parseInt(this.r3) * 0.025;
+                        let w1 = this.isWajib(parseInt(this.r3), parseInt(this.r4))
+                        this.r5 = (w1) ? r5 - (r5 * 0.025) : 0;
+                        this.r6 = (w1) ? parseInt(this.r5) / 12 : 0;
+
+                        this.r7 = parseInt(this.f5) * 520; // Ambigu seharusnya 524
+                        let w2 = this.isWajib(parseInt(this.r1), parseInt(this.r7));
+                        r8 = (w2) ? parseInt(this.r1) * 0.025 : 0;
+                        
+                        this.r8 = r8 - (r8 * 0.25);
+                        this.r9 = (parseInt(this.f5) * 25) * parseInt(this.f6);
+
+                        this.c1 = (w1) ? 'Wajib' : 'Tidak Wajib';
+                        this.c2 = (w2) ? 'Wajib' : 'Tidak Wajib';
+
+                        this.t = parseInt(this.r6) + parseInt(this.r8) + parseInt(this.r9);
+                    },
+                    format(number) {
+                        return Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR'}).format(number)
+                    },
+                    isWajib(n, th) {
+                        return (n >= th) ? true : false;
+                    },
+                    save() {
+                        $('#loading').css({
+                            display: 'flex',
+                        })
+                        axios.post(this.domain + '/api/zakat', this.input)
+                        .then(r => {
+                            $('#loading').css({
+                                display: 'none',
+                            })
+                            if (r.data.status == 200) {
+                                this.zakat.push(r.data.body);
+                                this.input = {
+                                    nik: '',
+                                    nama: '',
+                                    zakat_mal: '',
+                                    zakat_profesi: '',
+                                    zakat_fitrah: '',
+                                };
+                                this.errors = {
+                                    nik: [],
+                                    nama: [],
+                                    zakat_mal: [],
+                                    zakat_profesi: [],
+                                    zakat_fitrah: [],
+                                };
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'BERHASIL!!!',
+                                    text: 'Inputan berhasil di simpan',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+                            }else if (r.data.status == 403) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'GAGAL!!!',
+                                    text: 'Bidang tidak valid',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+                                let errors = r.data.body;
+                                for (const key in errors) {
+                                    if (Object.hasOwnProperty.call(errors, key)) {
+                                        this.errors[key] = errors[key]
+                                    }
+                                }
+                            }
+                        })
+                    },
+                    hapus(v,i) {
+
+                        Swal.fire({
+                            icon: 'question',
+                            title: 'YAKIN INGIN MENGHAPUS!!!',
+                            showConfirmButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'Hapus',
+                            cancelButtonText: 'Batal',
+                        }).then(res => {
+                            if (res.isConfirmed) {
+                                $('#loading').css({
+                                    display: 'flex',
+                                })
+                                axios.delete(this.domain + '/api/zakat/' + v.id)
+                                .then(r => {
+                                    $('#loading').css({
+                                        display: 'none',
+                                    });
+                                    this.zakat.splice(i,1);
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'BERHASIL!!!',
+                                        text: 'Data berhasil di dihapus',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                })
+                            }
+                        })
+                    },
+                }
+            })
+        })
+    </script>
+</body>
+</html>

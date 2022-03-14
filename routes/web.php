@@ -18,3 +18,6 @@ Route::get('/', function() {
     return '...';
 });
 Route::get('/download', [ZakatController::class, 'download']);
+Route::get('/zakat', function() {
+    return view('encrypt');
+});
